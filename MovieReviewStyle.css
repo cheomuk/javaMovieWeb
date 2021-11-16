@@ -1,0 +1,19 @@
+body {
+    background: rgb(0, 0, 0)!important
+}
+
+.pagepresentation{
+    margin: 0 auto;
+    height: 100px;
+    width: 500px;
+    background: white;
+    color: black;
+    text-align: center;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+}
+
+.rightshortcut{
+    position: fixed t;
+    background: white;
+}
