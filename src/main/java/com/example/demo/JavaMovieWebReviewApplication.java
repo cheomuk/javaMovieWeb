@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class JavaMovieWebReviewApplication {
 	
 	public static void main(String[] args) {
+		// 주석추가
 		SpringApplication.run(JavaMovieWebReviewApplication.class, args);
 	}
 }
