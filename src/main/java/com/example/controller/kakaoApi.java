@@ -1,4 +1,4 @@
-package com.example.mapper;
+package com.example.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -89,11 +89,11 @@ public class kakaoApi {
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			
-			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+			String profile_nickname = properties.getAsJsonObject().get("profile_nickname").getAsString();
+			String account_email = kakaoAccount.getAsJsonObject().get("account_email").getAsString();
 			
-			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
+			userInfo.put("profile_nickname", profile_nickname);
+			userInfo.put("account_email", account_email);
 			
 			
 		} catch (Exception e) {
