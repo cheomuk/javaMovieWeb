@@ -5,11 +5,10 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.example.mapper.kakaoApi;
 
 @RestController
 public class signController {
@@ -25,11 +24,11 @@ kakaoApi kakaoApi = new kakaoApi();
 		
 		System.out.println("login info : " + userInfo.toString());
 		
-		if(userInfo.get("email") != null) {
-			session.setAttribute("userId", userInfo.get("email"));
+		if(userInfo.get("account_email") != null) {
+			session.setAttribute("userId", userInfo.get("account_email"));
 			session.setAttribute("accessToken", accessToken);
 		}
-		mav.addObject("userId", userInfo.get("email"));
+		mav.addObject("userId", userInfo.get("account_email"));
 		mav.setViewName("index");
 		return mav;
 	}
