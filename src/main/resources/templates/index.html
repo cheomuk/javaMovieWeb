@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
-	<h1>Kakao Login Test</h1>
+	<h1>로그인 방법을 선택해주세요.</h1>
 	<span th:if="${userId==null}">
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=fc55dc4d7388cceddc4b9d22feaa308d&redirect_uri=http://localhost:3000/login&response_type=code">
-			<img width="223" src = "images/kakao_login_medium_narrow.png" />
+			<img width="223" src ="kakao_login_medium_narrow.png"/>
 		</a>
 	</span>
 	<span th:if="${userId!=null}">
 		<form name="logout" action="http://localhost:3000/logout">
-			<input type="submit" value="로그아웃">
+			<!--  <input type="submit" value="로그아웃"> -->
 		</form>
 	</span>
 </body>
