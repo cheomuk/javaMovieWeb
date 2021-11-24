@@ -22,10 +22,10 @@ public interface userProfileMapper {
 	@Select("SELECT * FROM userprofile")					// Read 기능 구현
 	List<userProfile>getUserProfileList();
 	
-	@Insert("INSERT INTO userprofile VALUES(#{id}, #{user_id})")					// Create 기능 구현
+	@Insert("INSERT INTO userprofile VALUES(#{id}, #{user_id})")			// Create 기능 구현
 	int insertUserProfile(@Param("id") String id, @Param("user_id") String user_id);
 	
-	@Update("UPDATE userprofile SET user_id=#{user_id} WHERE id=#{id}")	// Update 기능 구현
+	@Update("UPDATE userprofile SET user_id=#{user_id} WHERE id=#{id}")		// Update 기능 구현
 	int updateUserProfile(@Param("id") String id, @Param("user_id") String user_id);
 	
 	@Delete("DELETE FROM userprofile WHERE id=#{id}")		// Delete 기능 구현
