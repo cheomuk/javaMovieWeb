@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 
 	<!-- 문자 인코딩 방식을 UTF-8로 설정 -->
@@ -53,11 +53,7 @@
         <div class="page" id="next">Next Page</div>
 
     </div>
-	
 
-	
-	
-	
 	<!-- 영화 리뷰 모달(팝업)-->
 	<div class="modal" id="review_modal" tabindex="-1">
 
@@ -146,7 +142,7 @@
 								<div class="card-body">
 								<h5 class="card-title">${movie_list[i].title}</h5>
 
-								<a href="#!" class="btn btn-success" style="width:100%" onclick=review(${movie_list[i].id})>후기 보기</a>
+								<a href="main" class="btn btn-success" style="width:100%" onclick=review(${movie_list[i].id})>후기 보기</a>
 
 								</div>
 							</div>
@@ -234,4 +230,4 @@
 		}
 	</script>
 </body>
-</html>
+</html >

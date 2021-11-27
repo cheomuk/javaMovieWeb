@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,9 +37,14 @@ public class appController {
 		this.movie_mapper = mapper;
 	}
 	
-	@RequestMapping(value = "/main")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String review() {
 		return "MovieReview";
+	}
+	
+	@RequestMapping(value = "/kakao/login", method = RequestMethod.GET)
+	public String login() {
+		return "index";
 	}
 	
 	@PostMapping("/movie/create/{id}")		// Create 기능
