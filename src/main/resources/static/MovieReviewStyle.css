@@ -17,3 +17,11 @@ body {
     position: fixed t;
     background: white;
 }
+
+.modal{
+    display : none;
+}
+
+.modal.show-modal{
+    display: block;
+}
