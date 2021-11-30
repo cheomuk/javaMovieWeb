@@ -405,33 +405,31 @@ function showMovies(data){
 
             // 영화 리뷰 창을 여는 openWindow 함수 실행
             openWindow(movie)
-        })  
+        })
     })
 }
 
 // 상수 reviewContents : review-contents라는 id를 가진 html element를 저장
 const reviewContents = document.getElementById('review-contents');
+const movieReviewTitle = document.getElementById('movie-review-title');
 
 // 영화 리뷰창을 열고 내부 내용을 지정하는 openWindow 함수(인수로 showMovies 함수에서 받아온 영화의 정보를 가져옴)
 function openWindow(movie) {
 
-    // 변수 movieId : showMovies 함수에서 받아온 영화의 정보에서 영화의 id를 가져옴
-    let movieId = movie.id;
-
     // review-window id를 가진 html element를 가져와 스타일 변경(높이를 100%로 변경)
     // 원래 width값이 0으로 숨겨져 있던 리뷰 창이 나타나는 효과
     document.getElementById("review-window").style.width = "100%";
-
-
-    // 변수 reviewinformation : 리뷰할 영화의 제목과 서버로부터 받아온 해당 영화의 리뷰를 저장
-    // 받아온 리뷰를 추가하는 기능은 추후 추가 에정
-    var reviewInformation = 
+    
+    // 영화의 제목 출력 div에 리뷰할 영화의 제목 출력
+    movieReviewTitle.innerHTML = 
     `
     <h1 class="review-window-title">${movie.original_title} 리뷰</h1>
     <br/>
     `
-    // reviewContents의 html element에 변수 reviewInformation의 내용 삽입
-    reviewContents.innerHTML = reviewInformation;
+    
+    addReview(movie);
+    
+    
 }
 
 // 리뷰창 닫기 함수(리뷰 창의 x 버튼을 누르면 closeWindow 함수가 호출되도록 함)
@@ -441,6 +439,32 @@ function closeWindow() {
     document.getElementById("review-window").style.width = "0%";
 }
 
+function addReview(){
+    
+    // 변수 movieId : showMovies 함수에서 받아온 영화의 정보에서 영화의 id를 가져와 저장
+    var movieId = movie.id;
+
+    // 변수 writedReview : 사용자가 입력한 리뷰를 저장
+    var writedReview = "";
+
+
+    // 변수 makereview 사용자로부터 입력받은 리뷰를 db에 저장하기 위한 형태(json)로 바꾸어 저장 
+    var makereview = {};
+    makereview[movieId] = {"userID" : "userID", "review" : writedReview};
+
+    console.log(makereview);
+    // 여기서 서버에 makereview를 post할 예정
+
+
+    //여기서 db에 저장된 리뷰를 가져올 예정
+
+    // 변수 savedReview : 서버로부터 읽어온 영화의 리뷰를 저장(이후 savedReview를 reviewInformation에 추가)
+    var savedReview = "";
+
+    // 
+    // reviewContents.innerHTML =
+    
+}
 
 // 리뷰를 db에 저장할 때 시도해보고싶은 방법
 // 내가 원하는 자료의 형태
