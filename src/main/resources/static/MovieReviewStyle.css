@@ -1,27 +1,128 @@
+/*웹 페이지 전체의 스타일 설정*/
 body {
+
+    /*배경 색을 검은색으로 설정(그냥 지정하면 적용되지 않는 현상이 있어서 !important로 우선 적용되도록 함)*/
     background: rgb(0, 0, 0)!important
 }
 
+/*웹페이지 상단의 간단한 페이지 소개의 스타일 설정(나중에 디자인을 조금 더 바꿀 에정)*/
 .pagepresentation{
+
+    /*다른 컨텐츠와 붙어있도록 하기 위해 margin을 0으로 설정*/
     margin: 0 auto;
+
+    /*페이지 소개 div의 크기 설정*/
     height: 100px;
     width: 500px;
+
+    /*페이지 소개 div의 배경색 설정*/
     background: white;
+
+    /*페이지 소개 div의 글씨 색을 검은색으로 설정*/
     color: black;
+
+    /*페이지 소개 div의 글씨 위치를 중앙으로 설정*/
     text-align: center;
+
+    /*페이지 소개 div의 좌하단과 우하단의 꼭짓점에 곡률을 줌*/
     border-bottom-left-radius: 80px;
     border-bottom-right-radius: 80px;
 }
 
-.rightshortcut{
-    position: fixed t;
-    background: white;
+/*리뷰창 제목 부분의 스타일 설정*/
+.review-window-title{
+
+    /*글씨색을 흰색으로 설정*/
+    color:white;
 }
 
-.modal{
-    display : none;
+/*리뷰 창 스타일 설정*/
+.review-window{
+
+    /*최초에 리뷰창의 너비를 0으로 해서 보이지 않도록 설정*/
+    height: 100%;
+    width: 0;
+
+    /*스크롤을 이동시켜도 게속 같은자리에 표시되도록 설정*/
+    position: fixed; 
+    
+
+    /*리뷰 창이 화면을 가득 채우도록 설정*/
+    left: 0;
+    top: 0;
+     
+    /*배경색을 검은색으로 설정*/
+    background-color: rgb(0,0,0);
+
+    /*배경을 80% 투명도의 검은색으로 설정*/
+    background-color: rgba(0,0,0, 0.9); 
+
+    /*내용이 좌우로 넘칠 때 좌우 스크롤이 나타나지 않도록 함*/
+    overflow-x: hidden; 
+
+    /*화면 전환 속도를 0.5초로 설정*/
+    transition: 0.5s; 
+}
+  
+/*리뷰할 영화의 제목 및 리뷰 내용을 출력할 review-contents의 스타일 설정*/
+.review-contents{
+    position: relative;
+    top: 10%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
 }
 
-.modal.show-modal{
-    display: block;
+/*리뷰창의 닫기 버튼의 스타일 설정*/
+.review-window .closebtn{
+
+    /*닫기 버튼의 위치를 고정 위치에 지정*/
+    position: absolute;
+
+    /*닫기버튼이 리뷰 창의 우상단에 표시되도록 설정*/
+    top: 20px;
+    right: 45px;
+
+    /*닫기 버튼의 폰트 크기 설정*/
+    font-size: 60px;
+}
+
+/*리뷰 추가를 위한 input 창과 리뷰 제출 버튼을 포함하는 div의 스타일 설정*/
+.add-review-div{
+
+    /*리뷰 추가 div를 상대 위치에 지정(위에 리뷰의 양이 많아지면 자연스럽게 아래로 이동하도록 설정)*/
+    position: relative;
+
+    /*리뷰 추가 div가 화면의 중하단에 위치하도록 설정*/
+    transform: translate(-50%, -50%);
+    top: 80%;
+    left:50%;
+    
+    /*리뷰 추가 div의 크기 설정*/
+    height: 50px;
+    width: 1300px;
+
+}
+
+/*리뷰 추가를 위한 input 입력창의 스타일 설정*/
+.review-form{
+
+    /*div 내부의 input 입력창의 위치를 고정 위치에 지정*/
+    position: absolute;
+
+    /*input 입력창이 div의 중앙에 위치하도록 설정*/
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+/*리뷰 추가 버튼 스타일 설정*/
+.addreview-btn{
+    /*div 내부의 리뷰 추가 버튼의 위치를 고정 위치에 지정*/
+    position: absolute;
+
+    /*리뷰 추가 버튼이 div의 우측 가운데에 위치하도록 설정(input 입력창의 옆에 표시되도록 설정)*/
+    top: 50%;
+    left:90%;
+    transform: translate(-50%, -50%);
 }

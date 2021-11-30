@@ -385,7 +385,7 @@ function showMovies(data){
         // - overview 변수에 저장된 overview 정보 출력
         // -  한줄 개행 후 리뷰 작성버튼 출력, 버튼 객체의 id를 영화의 id와 같게 설정
         movieElement.innerHTML =
-            `
+        `
             <img src="${poster_path ? IMG_URL + poster_path : "http://via.placeholder.com/1080x1580"}" alt="${title}">
             <div class="movie-info">
                 <h3>${title}</h3>
@@ -400,64 +400,65 @@ function showMovies(data){
         // mian 클래스를 가진 태그에 movieElement 객체 삽입
         main.appendChild(movieElement);
 
-        // reviewModal 함수 실행
-        reviewModal(id);
-        
+        // 영화의 id에 해당하는 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
+        document.getElementById(id).addEventListener('click', () => {
+
+            // 영화 리뷰 창을 여는 openWindow 함수 실행
+            openWindow(movie)
+        })  
     })
 }
 
-// 리뷰를 작성할 모달 창을 출력하기 위한 reviewModal 함수 실행
-function reviewModal(movieId){
+// 상수 reviewContents : review-contents라는 id를 가진 html element를 저장
+const reviewContents = document.getElementById('review-contents');
 
-    // 상수 modal : 'review_modal'이라는 id를 가진 태그에 해당하는 html element저장
-    const modal = document.getElementById('review_modal');
+// 영화 리뷰창을 열고 내부 내용을 지정하는 openWindow 함수(인수로 showMovies 함수에서 받아온 영화의 정보를 가져옴)
+function openWindow(movie) {
 
-    // 상수 openModalBtn : 'writeReviewBtn' 이라는 클래스를 가진 태그에 해당하는 html element 저장
-    const openModalBtn = document.querySelector(".open-modal");
+    // 변수 movieId : showMovies 함수에서 받아온 영화의 정보에서 영화의 id를 가져옴
+    let movieId = movie.id;
 
-    // 상수 addReviewBtn : 'addreview-Btn' 이라는 id를 가진 태그에 해당하는 html element 저장
-    const addReviewBtn = document.getElementById('addreview-Btn');
+    // review-window id를 가진 html element를 가져와 스타일 변경(높이를 100%로 변경)
+    // 원래 width값이 0으로 숨겨져 있던 리뷰 창이 나타나는 효과
+    document.getElementById("review-window").style.width = "100%";
 
-    // 상수 closeModalBtn : 'close' 라는 클래스를 가진 태그에 해당하는 html element 저장
-    const closeModalBtn = document.querySelector(".close");
 
-    // openModalBtn의 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
-    openModalBtn.addEventListener('click', () =>{
-
-        // modal의 html element에 "show-modal" 클래스 추가
-        modal.classList.add("show-modal")
-    })
-
-    // closeModalBtn의 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
-    closeModalBtn.addEventListener('click', () =>{
-
-        //modal의 html element에사 "show-modal" 클래스 제거
-        modal.classList.remove("show-modal")
-    })
-
-    // addReviewBtn의 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
-    addReviewBtn.addEventListener('click', () =>{
-
-        // addReview 함수 실행(showMovie 함수에서 받아온 movieId를 인자로 넘겨줌)
-        addReview(movieId);
-    })
+    // 변수 reviewinformation : 리뷰할 영화의 제목과 서버로부터 받아온 해당 영화의 리뷰를 저장
+    // 받아온 리뷰를 추가하는 기능은 추후 추가 에정
+    var reviewInformation = 
+    `
+    <h1 class="review-window-title">${movie.original_title} 리뷰</h1>
+    <br/>
+    `
+    // reviewContents의 html element에 변수 reviewInformation의 내용 삽입
+    reviewContents.innerHTML = reviewInformation;
 }
 
-function addReview(moiveId){
-    // 리뷰를 db에 저장할 때 시도해보고싶은 방법
-    // 내가 원하는 자료의 형태
-    // 영화ID : { 유저ID : XXX, 리뷰 내용 : OOO}의 형태로 저장하고
-    // 나중에 리뷰 내용을 보기 위해 호출할때 아마 문자열의 형태로 올테니까 json 형식으로 파싱후
-    // 키 값인 영화ID로 유저ID 및 리뷰 내용을 호출할 수 있도록 하는것이 목표
-    
-    // 위의 목표를 위해 이 addReview 함수에서 해야 할 일
-    // 먼저 위에서 모달창을 만들었으니 모달창에 유저가 입력한 값을 받아오기
-    // db로부터 유저의ID 정보 받아오기
-    // 인수로 받아온 movieId, db에서 받아온 유저ID, 유저로부터 입력받은 리뷰 내용을 조합하여 
-    // 하나의 json데이터로 만든 후 db에 저장해주는 것 
+// 리뷰창 닫기 함수(리뷰 창의 x 버튼을 누르면 closeWindow 함수가 호출되도록 함)
+function closeWindow() {
+
+    // review-window id를 가진 html element를 가져와 스타일 변경(높이를 0으로 변경)
+    document.getElementById("review-window").style.width = "0%";
 }
 
 
+// 리뷰를 db에 저장할 때 시도해보고싶은 방법
+// 내가 원하는 자료의 형태
+// 영화ID : { 유저ID : XXX, 리뷰 내용 : OOO}의 형태로 저장하고
+// 나중에 리뷰 내용을 보기 위해 호출할때 아마 문자열의 형태로 올테니까 json 형식으로 파싱후
+// 키 값인 영화ID로 유저ID 및 리뷰 내용을 호출할 수 있도록 하는것이 목표
+// 보내는 방식
+// post 형식
+// 주소 /movie/create/{id}
+// 받아오는 방식
+//get 방식
+// movieProfile 테이블에서 
+// id, movieid, review 
+// 위의 목표를 위해 이 addReview 함수에서 해야 할 일
+// 먼저 위에서 모달창을 만들었으니 모달창에 유저가 입력한 값을 받아오기
+// db로부터 유저의ID 정보 받아오기
+// 인수로 받아온 movieId, db에서 받아온 유저ID, 유저로부터 입력받은 리뷰 내용을 조합하여 
+// 하나의 json데이터로 만든 후 db에 저장해주는 것 
 
 
 

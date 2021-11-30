@@ -37,6 +37,25 @@
 	<!--영화 장르 태그 부분-->
 	<div id="tags"></div>
 
+	<div id="review-window" class="review-window">
+
+        <!-- 영화 리뷰 작성 팝업 닫기버튼 출력(하이퍼 링크를 이용하되 하이퍼 링크로 이동하지 않고 closeWindow 함수를 실행) -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeWindow()">&times;</a>
+      
+        <!-- 영화 리뷰창의 제목 및 영화에 작성된 리뷰를 출력하기위한 review-contents-->
+        <div class="review-contents" id="review-contents"></div>
+
+		<!-- 영화 리뷰를 입력받기 위한 div-->
+		<div class="add-review-div">
+
+			<!--사용자로부터 리뷰를 입력받기 위한 input 태그-->
+			<input type="text" class="review-form" id="review" style="width:70%">
+	
+			<!--사용자로부터 입력받은 리뷰를 저장하기 위한 button 태그-->
+			<button type="button" id="addreview-btn" class="addreview-btn">후기 쓰기</button>
+		</div>
+    </div>
+
 	<!--영화 내용 출력 부분-->
 	<main id="main"></main>
 
@@ -54,55 +73,7 @@
 
 	</div>
 
-
-
-
-<!--후기 보기 버튼 누르면 나오는 모달창-->
-<div class="modal" id="review_modal" tabindex="-1">
-
-	<!--모달 대화창 전체-->
-	<div class="modal-dialog">
-
-		<!--모달 컨텐츠 부분-->
-		<div class="modal-content">
-
-			<!--모달창 header 부분-->
-			<div class="modal-header">
-
-				<!--모달 창의 제목 출력-->
-		  		<h5 class="modal-title">후기</h5>
-				
-				<!--모달 창 닫기 버튼 출력-->
-		  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					
-					<!--닫기 버튼에 X 출력-->
-					<span aria-hidden="true">&times;</span>
-				</button>
-		  	</div>
-			
-			<!--모달창 body 부분-->
-		  	<div class="modal-body">	
-		  	</div>
-
-			<!--모달창 footer 부분-->
-		  	<div class="modal-footer">
-
-				<!--사용자로부터 리뷰를 입력받기 위한 input 태그-->
-				<input type="text" class="form-control" id="review" style="width:70%">
-
-				<!--사용자로부터 입력받은 리뷰를 저장하기 위한 button 태그-->
-				<button type="button" class="btn btn-primary" id="addreview-btn">후기 쓰기</button>
-			</div>
-	  	</div>
-	</div>
-</div>
-
-
-	
-
-
-	
-
+	<!--MovieReview.js 자바스크립트 파일을 포함하도록 함-->
 	<script src="MovieReview.js"></script>
 
 </body>
