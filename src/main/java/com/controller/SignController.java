@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.controller;
 
 import java.util.HashMap;
 
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class signController {
-kakaoApi kakaoApi = new kakaoApi();
+public class SignController {
+KakaoApi kakaoApi = new KakaoApi();
 	
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam("code") String code, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 1번 인증코드 요청 전달
-		String accessToken = kakaoApi.getAccessToken(code);
+		String accessToken = kakaoApi.GetAccessToken(code);
 		// 2번 인증코드로 토큰 전달
-		HashMap<String, Object> userInfo = kakaoApi.getUserInfo(accessToken);
+		HashMap<String, Object> userInfo = kakaoApi.GetUserInfo(accessToken);
 		
 		System.out.println("login info : " + userInfo.toString());
 		
@@ -37,7 +37,7 @@ kakaoApi kakaoApi = new kakaoApi();
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		kakaoApi.kakaoLogout((String)session.getAttribute("accessToken"));
+		kakaoApi.KakaoLogout((String)session.getAttribute("accessToken"));
 		session.removeAttribute("accessToken");
 		session.removeAttribute("userId");
 		mav.setViewName("index");
