@@ -1,13 +1,13 @@
-package com.example.model;
+package com.model;
 
-public class movieProfile {
+public class MovieProfile {
 	private String id;
-	private String movie_id;
+	private String movieId;
 	private String review;
 	
-	public movieProfile(String id, String movie_id, String review) {
+	public MovieProfile(String id, String movieId, String review) {
 		this.id = id;
-		this.movie_id = movie_id;
+		this.movieId = movieId;
 		this.review = review;
 	}
 
@@ -19,12 +19,12 @@ public class movieProfile {
 		this.id = id;
 	}
 
-	public String getMovie_id() {
-		return movie_id;
+	public String getMovieId() {
+		return movieId;
 	}
 
-	public void setMovie_id(String movie_id) {
-		this.movie_id = movie_id;
+	public void setMovieId(String movieId) {
+		this.movieId = movieId;
 	}
 
 	public String getReview() {

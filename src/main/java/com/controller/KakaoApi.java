@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,9 +12,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class kakaoApi {
+public class KakaoApi {
 	
-	public String getAccessToken(String code) {
+	public String GetAccessToken(String code) {
 		String accessToken = "";
 		String refreshToken = "";
 		String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -62,7 +62,7 @@ public class kakaoApi {
 	}
 
 	
-	public HashMap<String, Object> getUserInfo(String accessToken) {
+	public HashMap<String, Object> GetUserInfo(String accessToken) {
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqUrl = "https://kapi.kakao.com/v2/user/me";
 		try {
@@ -103,7 +103,7 @@ public class kakaoApi {
 	}
 
 
-	public void kakaoLogout(String accessToken) {
+	public void KakaoLogout(String accessToken) {
 		String reqURL = "http://kapi.kakao.com/v1/user/logout";
 		try {
 			URL url = new URL(reqURL);
