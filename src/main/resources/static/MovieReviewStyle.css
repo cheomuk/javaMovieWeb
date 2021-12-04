@@ -22,6 +22,9 @@ header{
 }
 
 .search{
+
+
+    
     /*검색창의 배경색을 흰색으로 설정*/
     background-color: white;
 
@@ -31,9 +34,22 @@ header{
     /*테두리와 내부 컨텐츠 사이의 거리를 세로 0.5rem, 가로 1rem으로 설정*/
     padding: 0.5rem 1rem;
 
-    /**/
+    /*둥글기를 50px로 설정*/
     border-radius: 50px;
+
+    /*글자의 크기를 1rem으로 설정*/
     font-size: 1rem;
+
+    /*검색창의 상하 크기를 header div의 70%가 되도록 설정*/
+    height: 70%;
+}
+
+/*카카오 로그인 버튼의 출력 스타일 설정*/
+.kakao-login{
+
+    /*카카오 로그인 버튼을 우측으로 정렬*/
+    margin-left: auto;
+
 }
 
 /*웹페이지 상단의 간단한 페이지 소개의 스타일 설정(나중에 디자인을 조금 더 바꿀 에정)*/
