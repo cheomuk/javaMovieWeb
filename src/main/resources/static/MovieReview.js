@@ -5,13 +5,13 @@ const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 // 상수 API_URL : 영화 정보를 가져오기 위한 url 주소 저장(인기순 정렬로 가져옴)
-const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
+const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
 
 // 상수 IMG_URL : 영화 포스터 이미지를 가져오기 위한 url 주소 저장
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
 // 상수 searchURL :  영화 검색 url 저장
-const searchURL = BASE_URL + '/search/movie?'+API_KEY;
+const searchURL = BASE_URL + '/search/movie?' + API_KEY;
 
 
 // 리스트 genres : 장르 id와 name map형식으로 저장
@@ -94,7 +94,7 @@ const genres = [
 // 상수 main : 'main'이라는 id를 가진 태그에 해당하는 html element저장
 const main = document.getElementById('main');
 // 상수 form : 'form'이라는 id를 가진 태그에 해당하는 html element저장
-const form =  document.getElementById('form');
+const form = document.getElementById('form');
 // 상수 search : 'search'라는 id를 가진 태그에 해당하는 html element저장
 const search = document.getElementById('search');
 // 상수 tagsElement : 'tag'라는 id를 가진 태그에 해당하는 html element저장
@@ -127,48 +127,48 @@ var selectedGenre = []
 setGenre();
 
 // 장르 설정 함수 setGenre()
-function setGenre(){
+function setGenre() {
 
     // tagsElement 안에 저장된 html elemnet에 접근하여 해당 태그의 내부 내용을 ''(내용없음)로 바꿈
-    tagsElement.innerHTML= '';
+    tagsElement.innerHTML = '';
 
     // genre의 각각의 인덱스에 해당하는 value를 가져와 루프를 돌때마다 인덱스 순서대로 매개변수 genre에 저장
     genres.forEach(genre => {
 
-        // 상수 g_tag : div 객체(html element) 생성하여 저장
-        const g_tag = document.createElement('div');
+        // 상수 genretag : div 객체(html element) 생성하여 저장
+        const genretag = document.createElement('div');
 
-        // g_tag div 객체에 tag 클래스 추가
-        g_tag.classList.add('tag');
+        // genretag div 객체에 tag 클래스 추가
+        genretag.classList.add('tag');
 
-        // g_tag의 div 객체의 id를 리스트 genres에서 받아온 장르의 id로 설정 
-        g_tag.id=genre.id;
+        // genretag의 div 객체의 id를 리스트 genres에서 받아온 장르의 id로 설정 
+        genretag.id = genre.id;
 
-        // g_tag의 div 객체에 genres에서 받아온 장르의 name 값으로 텍스트 삽입
-        g_tag.innerText = genre.name;
+        // genretag의 div 객체에 genres에서 받아온 장르의 name 값으로 텍스트 삽입
+        genretag.innerText = genre.name;
 
-        // g_tag의 div 객체에 이벤트 리스너 추가 (클릭시 이벤트 발생)
-        g_tag.addEventListener('click', () => {
+        // genretag의 div 객체에 이벤트 리스너 추가 (클릭시 이벤트 발생)
+        genretag.addEventListener('click', () => {
 
             // 만약 selectedGenre의 길이가 0이면 (선택된 장르가 없다면) if문 실행  
-            if(selectedGenre.length == 0){
+            if (selectedGenre.length == 0) {
 
                 // selectedGenre 리스트에 장르의 id추가
                 selectedGenre.push(genre.id);
             }
 
             // selectedGenre 리스트에 선택된 장르가 이미 존재한다면 else문 실행
-            else{
+            else {
 
                 // 만약 selectedGenre에 내가 선택한 장르와 같은 장르가 존재한다면 if문 실행
-                if(selectedGenre.includes(genre.id)){
+                if (selectedGenre.includes(genre.id)) {
 
                     // selectedGenre의 내용물들을 순서대로 가져와서
                     // 배열 내 현재 값은 id에, 배열 내 현재 값의 인덱스 번호를 id_index에 저장
                     selectedGenre.forEach((id, id_index) => {
 
                         // 만약 배열의 현재 값(장르)이 내가 선택한 장르와 같다면 if문 실행
-                        if(id == genre.id){
+                        if (id == genre.id) {
 
                             //selectedGenre 리스트에서 해당 장르 삭제(id_index 인덱스 번호부터 1개의 요소 삭제)
                             selectedGenre.splice(id_index, 1);
@@ -177,7 +177,7 @@ function setGenre(){
                 }
 
                 // 만약 selectedGenre에 내가 선택한 장르와 같은 장르가 존재하지 않는다면 else문 실행
-                else{
+                else {
 
                     // selectedGenre 리스트에 내가 선택한 장르의 id 추가
                     selectedGenre.push(genre.id);
@@ -188,14 +188,14 @@ function setGenre(){
             // join 함수를 이용해 selectedGenre 리스트의 모든 원소들을 하나의 값으로 만듬(원소와 원소 사이 ,추가)
             // 만들어진 값을 encodeURI 함수를 이용해 퍼센트 인코딩 하여 인코딩 된 주소값으로 장르 검색
             // getMovies 함수를 이용해 선택된 장르에 맞는 영화를 호출
-            getMovies(API_URL + '&with_genres='+encodeURI(selectedGenre.join(',')));
+            getMovies(API_URL + '&with_genres=' + encodeURI(selectedGenre.join(',')));
 
             // 선택된 장르의 강조(색 변경) 함수 실행
             highlightSelection();
         })
 
-        //tagsElement(tag라는 id를 가진 태그) 안에 g_tag의 div 객체를 삽입
-        tagsElement.append(g_tag);
+        //tagsElement(tag라는 id를 가진 태그) 안에 genretag의 div 객체를 삽입
+        tagsElement.append(genretag);
     })
 }
 
@@ -218,7 +218,7 @@ function highlightSelection(){
     clearBtn();
 
     //selectedGenre 리스트의 길이가 0이 아니면 if문 실행(선택된 장르가 존재하면 실행)
-    if(selectedGenre.length != 0){  
+    if (selectedGenre.length != 0) {
 
         // selectedGenre의 각각의 인덱스에 해당하는 value를 가져와 루프를 돌때마다 인덱스 순서대로 매개변수 id에 저장
         selectedGenre.forEach(id => {
@@ -239,20 +239,20 @@ function clearBtn(){
     let clearBtn = document.getElementById('clear');
 
     // clearBtn에 값이 존재한다면 if문 실행 (clear라는 id를 가진 태그가 있다면 실행) 
-    if(clearBtn){
+    if (clearBtn) {
 
         // clearBtn의 element 객체에 highlight 클래스 추가
         clearBtn.classList.add('highlight');
     }
 
     // clear라는 id를 가진 태그가 없다면 아래의 else문 실행
-    else{
+    else {
 
         // 변수 clear : div 객체(html element)생성하여 저장
         let clear = document.createElement('div');
 
         // clear의 div 객체에 tag, highlight 클래스 추가
-        clear.classList.add('tag','highlight');
+        clear.classList.add('tag', 'highlight');
 
         // clear의 div 객체의 id를 clear로 설정
         clear.id = 'clear';
@@ -267,15 +267,15 @@ function clearBtn(){
             selectedGenre = [];
 
             // 장르 설정 함수 호출
-            setGenre();           
-      
+            setGenre();
+
             // 영화 불러오기 함수 호출
             getMovies(API_URL);
         })
 
         //tagsElement(tag라는 id를 가진 태그) 안에 clear의 div 객체를 삽입
         tagsElement.append(clear);
-    }   
+    }
 }
 
 // 영화 호출 함수 실행
@@ -295,7 +295,7 @@ function getMovies(url){
     fetch(url).then(res => res.json()).then(data => {
 
         // 가져온 데이터의 길이가 0이 아니면 if문 안의 코드 실행
-        if(data.results.length !== 0){
+        if (data.results.length !== 0) {
 
             // 영화 보여주기 함수 실행(가져온 영화 데이터 전달)
             showMovies(data.results);
@@ -316,7 +316,7 @@ function getMovies(url){
             current.innerText = currentPage;
 
             // 만약 현재 페이지가 1이거나 그보다 작다면 if문 안의 코드 실행
-            if(currentPage <= 1){
+            if (currentPage <= 1) {
 
                 // prev id를 가진 태그에 disabled 클래스 추가
                 //(1페이지는 이전페이지가 존재하지 않으므로 이전 페이지 호출 기능을 없앰)
@@ -328,7 +328,7 @@ function getMovies(url){
             }
 
             // 만약 현재 페이지가 전체 페이지보다 크거나 같으면 else if문 안의 코드 실행
-            else if(currentPage>= totalPages){
+            else if (currentPage >= totalPages) {
 
                 // prev id를 가진 태그에서 disabled 클래스 삭제
                 prev.classList.remove('disabled');
@@ -336,22 +336,22 @@ function getMovies(url){
                 // next id를 가진 태그에 disabled 클래스 추가
                 next.classList.add('disabled')
             }
-            
+
             // 현재 페이지가 맨 처음 페이지 혹은 맨 마지막 페이지가 아니라면 else문 안의 코드 실행 
-            else{
+            else {
 
                 //prev id를 가진 태그와 next id를 가진 태그에서 disabled 클래스 삭제
                 prev.classList.remove('disabled');
                 next.classList.remove('disabled')
-            } 
+            }
         }
-        
-        // 가져온 데이터의 길이가 0인 경우 else문 안의 코드 실행(가져온 데이터가 없는 경우 else문 실행)
-        else{
 
-        // main이라는 id를 가진 태그를 찾아 ht 태그 및 h1태그 내부 내용 삽입
-        main.innerHTML= `<h1 class="no-results">불러온 영화가 없습니다.</h1>`
-        }  
+        // 가져온 데이터의 길이가 0인 경우 else문 안의 코드 실행(가져온 데이터가 없는 경우 else문 실행)
+        else {
+
+            // main이라는 id를 가진 태그를 찾아 ht 태그 및 h1태그 내부 내용 삽입
+            main.innerHTML = `<h1 class="no-results">불러온 영화가 없습니다.</h1>`
+        }
     })
 }
 
@@ -367,7 +367,7 @@ function showMovies(data){
 
         // 좌항의 변수명과 movie 안의 영화 정보(json 데이터)의 key값을 매칭하여 변수에 value값을 저장
         // 예) 변수 title에는 title의 key 값을 가진 데이터의 value가 저장됨
-        const {title, poster_path, vote_average, overview, id} = movie;
+        const { title, poster_path, vote_average, id } = movie;
 
         // 상수 movieElement : div 객체로 초기화
         const movieElement = document.createElement('div');
@@ -380,61 +380,129 @@ function showMovies(data){
         // movie-info 클래스를 가진 div 태그 : 
         // - h3 형식으로 영화 제목 출력
         // - span의 클래스를 changeColor로부터 리턴받은 값(평점에 따라 색 차별)으로 설정 후 평균 평점 출력
-        // overview 클래스를 가진 div 태그 : 영화 카드에 마우스를 올리면 나오는 overview
-        // - h3 형식으로 overview 텍스트 출력
-        // - overview 변수에 저장된 overview 정보 출력
+        // writeReview 클래스를 가진 div 태그 : 리뷰 작성 버튼을 출력
         // -  한줄 개행 후 리뷰 작성버튼 출력, 버튼 객체의 id를 영화의 id와 같게 설정
-        movieElement.innerHTML = 
+        movieElement.innerHTML =
         `
-            <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
+            <img src="${poster_path ? IMG_URL + poster_path : "http://via.placeholder.com/1080x1580"}" alt="${title}">
             <div class="movie-info">
                 <h3>${title}</h3>
                 <span class="${changeColor(vote_average)}">${vote_average}</span>
             </div>
-
-            <div class="overview">
-                <h3>Overview</h3>
-                ${overview}
-                <br/> 
-                <button class="know-more" id="${id}">리뷰 작성</button>
+            <div class="writeReview">
+                <button class="open-review-btn" id="${id}">리뷰 작성</button>
             </div>
         
         `
-        //mian 클래스를 가진 태그에 movieElement 객체 삽입
+        // mian 클래스를 가진 태그에 movieElement 객체 삽입
         main.appendChild(movieElement);
 
-        // id라는 id를 가진 태그를 찾아 이벤트 리스트 추가
-        //(익명함수를 콜백함수로 사용하여 함수를 별도로 호출하지 않아도 즉시 실행되도록 함)
+        // 영화의 id에 해당하는 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
         document.getElementById(id).addEventListener('click', () => {
 
-            //여기에 리뷰 작성 기능 추가 예정
+            // 영화 리뷰 창을 여는 openWindow 함수 실행
+            openWindow(movie)
         })
     })
 }
 
+// 상수 reviewContents : review-contents라는 id를 가진 html element를 저장
+const reviewContents = document.getElementById('review-contents');
+const movieReviewTitle = document.getElementById('movie-review-title');
+
+// 영화 리뷰창을 열고 내부 내용을 지정하는 openWindow 함수(인수로 showMovies 함수에서 받아온 영화의 정보를 가져옴)
+function openWindow(movie) {
+
+    // review-window id를 가진 html element를 가져와 스타일 변경(높이를 100%로 변경)
+    // 원래 width값이 0으로 숨겨져 있던 리뷰 창이 나타나는 효과
+    document.getElementById("review-window").style.width = "100%";
+    
+    // 영화의 제목 출력 div에 리뷰할 영화의 제목 출력
+    movieReviewTitle.innerHTML = 
+    `
+    <h1 class="review-window-title">${movie.original_title} 리뷰</h1>
+    <br/>
+    `
+    
+    addReview(movie);
+    
+    
+}
+
+// 리뷰창 닫기 함수(리뷰 창의 x 버튼을 누르면 closeWindow 함수가 호출되도록 함)
+function closeWindow() {
+
+    // review-window id를 가진 html element를 가져와 스타일 변경(높이를 0으로 변경)
+    document.getElementById("review-window").style.width = "0%";
+}
+
+function addReview(){
+    
+    // 변수 movieId : showMovies 함수에서 받아온 영화의 정보에서 영화의 id를 가져와 저장
+    var movieId = movie.id;
+
+    // 변수 writedReview : 사용자가 입력한 리뷰를 저장
+    var writedReview = "";
+
+
+    // 변수 makereview 사용자로부터 입력받은 리뷰를 db에 저장하기 위한 형태(json)로 바꾸어 저장 
+    var makereview = {};
+    makereview[movieId] = {"userID" : "userID", "review" : writedReview};
+
+    console.log(makereview);
+    // 여기서 서버에 makereview를 post할 예정
+
+
+    //여기서 db에 저장된 리뷰를 가져올 예정
+
+    // 변수 savedReview : 서버로부터 읽어온 영화의 리뷰를 저장(이후 savedReview를 reviewInformation에 추가)
+    var savedReview = "";
+
+    // 
+    // reviewContents.innerHTML =
+    
+}
+
+// 리뷰를 db에 저장할 때 시도해보고싶은 방법
+// 내가 원하는 자료의 형태
+// 영화ID : { 유저ID : XXX, 리뷰 내용 : OOO}의 형태로 저장하고
+// 나중에 리뷰 내용을 보기 위해 호출할때 아마 문자열의 형태로 올테니까 json 형식으로 파싱후
+// 키 값인 영화ID로 유저ID 및 리뷰 내용을 호출할 수 있도록 하는것이 목표
+// 보내는 방식
+// post 형식
+// 주소 /movie/create/{id}
+// 받아오는 방식
+//get 방식
+// movieProfile 테이블에서 
+// id, movieid, review 
+// 위의 목표를 위해 이 addReview 함수에서 해야 할 일
+// 먼저 위에서 모달창을 만들었으니 모달창에 유저가 입력한 값을 받아오기
+// db로부터 유저의ID 정보 받아오기
+// 인수로 받아온 movieId, db에서 받아온 유저ID, 유저로부터 입력받은 리뷰 내용을 조합하여 
+// 하나의 json데이터로 만든 후 db에 저장해주는 것 
 
 
 
 // 평점 평균에 따른 색 변경 함수 changeColor(매개변수 a_vote에 평점 평균값을 받아와 저장)
-function changeColor(a_vote){
+function changeColor(averageVote){
 
     // 평점 평균이 8이상이면 'green' 리턴
-    if(a_vote>= 8){
+    if (averageVote >= 8){
         return 'green'
     }
 
     // 평점 평균이 5이상 8미만이면 'orange' 리턴
-    else if(a_vote >= 5){
+    else if (averageVote >= 5){
         return "orange"
     }
     // 평점 평균이 5미만이면 'red' 리턴
-    else{
+    else {
         return 'red'
     }
 }
 
 // form 이라는 id를 가진 html element를 찾아 이벤트 리스너 추가(submit버튼 클릭시 이벤트 발생, 콜백함수로 이벤트 객체를 참조)
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', (e) =>{
 
     // 이벤트 중단(ubmit과 동시에 창이 다시 실행되면서 초기화면으로 돌아가는 것을 방지)
     e.preventDefault();
@@ -449,12 +517,12 @@ form.addEventListener('submit', (e) => {
     setGenre();
 
     // searchTerm에 값이 입력되었다면 if문 실행
-    if(searchTerm) {
+    if (searchTerm){
 
         // 사용자로부터 입력받은 값으로 검색한 영화 호출 
         getMovies(searchURL + '&query=' + searchTerm)
     }
-    
+
     // searchTerm에 값이 입력되지 않았다면 else문 실행
     else{
 
@@ -464,10 +532,10 @@ form.addEventListener('submit', (e) => {
 })
 
 // prev의 div 객체(html elemnet)에 이벤트 리스너 추가(클릭시 이벤트 발생)
-prev.addEventListener('click', () => {
+prev.addEventListener('click', () =>{
 
     // 이전 페이지의 값이 0보다 크다면 if문 실행
-    if(prevPage > 0){
+    if (prevPage > 0){
 
         // pageCall 함수를 통해 이전 페이지 호출
         pageCall(prevPage);
@@ -475,10 +543,10 @@ prev.addEventListener('click', () => {
 })
 
 // next의 div 객체(html elemnet)에 이벤트 리스너 추가(클릭시 이벤트 발생)
-next.addEventListener('click', () => {
+next.addEventListener('click', () =>{
 
     // 다음 페이지가 마지막 페이지이거나 그보다 작으면 if문 실행
-    if(nextPage <= totalPages){
+    if (nextPage <= totalPages) {
 
         // pageCall 함수를 이용해 다음페이지 호출
         pageCall(nextPage);
@@ -496,13 +564,13 @@ function pageCall(page){
     let queryParams = urlSplit[1].split('&');
 
     // 리스트 key : 리스트 queryParams의 뒤에서 2번째 인덱스에 저장된 값을 =을 기준으로 나누어 리스트 형태로 저장
-    let key = queryParams[queryParams.length -1].split('=');
+    let key = queryParams[queryParams.length - 1].split('=');
 
     // 리스트 key의 맨처음 인덱스의 value가 'page'가 아니면 if문 실행
-    if(key[0] != 'page'){
+    if (key[0] != 'page'){
 
         // 변수 url : 마지막으로 호출한 url주소 + '&page=' + 호출할 페이지 정보를 조합하여 url주소를 생성후 저장
-        let url = lastUrl + '&page='+page
+        let url = lastUrl + '&page=' + page
 
         // 변수 url에 저장된 호출할 페이지 주소를 실제로 호출하는 역할을 수행하는 getMovies함수 호출
         getMovies(url);
@@ -519,14 +587,14 @@ function pageCall(page){
         let joinurl1 = key.join('=');
 
         // 리스트 queryParams의 뒤에서 2번째 인덱스에 변수 a에 저장된 값 대입
-        queryParams[queryParams.length -1] = makeurl1;
+        queryParams[queryParams.length - 1] = makeurl1;
 
         // 변수 joinurl2 : 리스트 queryParams의 모든 인덱스를 join함수를 통해 하나로 결합하여 저장
         // (인덱스와 인덱스 사이에 & 추가 하여 결합, 위의 분해 과정을 다시 되돌리는 과정)
         let joinurl2 = queryParams.join('&');
 
         // 변수 url : 리스트 urlSplit의 0번 인덱스의 value + '?' = joinurl2에 저장된 값을 조합하여 url 주소 생성후 저장
-        let url = urlSplit[0] +'?'+ joinurl2
+        let url = urlSplit[0] + '?' + joinurl2
 
         // 변수 url에 저장된 호출할 페이지 주소를 실제로 호출하는 역할을 수행하는 getMovies함수 호출
         getMovies(url);
