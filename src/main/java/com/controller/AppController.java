@@ -37,16 +37,6 @@ public class AppController {
 		this.movieMapper = mapper;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String review() {
-		return "MovieReview";
-	}
-	
-	@RequestMapping(value = "/kakao/login", method = RequestMethod.GET)
-	public String login() {
-		return "index";
-	}
-	
 	@PostMapping("/movie/create/{id}")		// Create 기능
 	public void postMovieProfile(@PathVariable("id") String id, @RequestParam("movieId") String movieId, @RequestParam("review") String review) {
 		movieMapper.insertMovieProfile(id, movieId, review);
