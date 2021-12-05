@@ -12,8 +12,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class KakaoApi {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class KakaoAPI {
 	
+	private static Logger logger = LoggerFactory.getLogger(KakaoAPI.class);
+	
+	@SuppressWarnings({ "deprecation", "unused" })
 	public String GetAccessToken(String code) {
 		String accessToken = "";
 		String refreshToken = "";
@@ -28,7 +34,7 @@ public class KakaoApi {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=06859c97ade74a4ad05ab84ef48b1bd8");
+			sb.append("&client_id=fc55dc4d7388cceddc4b9d22feaa308d");
 			sb.append("&redirect_uri=http://localhost:3000/login");
 			sb.append("&code="+code);
 			
@@ -36,7 +42,7 @@ public class KakaoApi {
 			bw.flush();
 			
 			int responseCode = conn.getResponseCode();
-			System.out.println("response code = " + responseCode);
+			logger.info("response code = " + responseCode);
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
@@ -45,7 +51,7 @@ public class KakaoApi {
 			while((line = br.readLine())!=null) {
 				result += line;
 			}
-			System.out.println("response body="+result);
+			logger.info("response body="+result);
 			
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
@@ -62,6 +68,7 @@ public class KakaoApi {
 	}
 
 	
+	@SuppressWarnings("deprecation")
 	public HashMap<String, Object> GetUserInfo(String accessToken) {
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqUrl = "https://kapi.kakao.com/v2/user/me";
@@ -71,17 +78,18 @@ public class KakaoApi {
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
 			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode =" + responseCode);
+			logger.info("responseCode =" + responseCode);
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
 			String line = "";
 			String result = "";
+			String email = "";
 			
 			while((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body ="+result);
+			logger.info("response body ="+result);
 			
 			JsonParser parser = new JsonParser();
 			JsonElement element =  parser.parse(result);
@@ -89,19 +97,18 @@ public class KakaoApi {
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			
-			String profile_nickname = properties.getAsJsonObject().get("profile_nickname").getAsString();
-			String account_email = kakaoAccount.getAsJsonObject().get("account_email").getAsString();
-			
-			userInfo.put("profile_nickname", profile_nickname);
-			userInfo.put("account_email", account_email);
-			
+			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			if (kakaoAccount.get("email") != null)
+				email = kakaoAccount.get("email").getAsString();
+	
+			userInfo.put("nickname", nickname);
+			userInfo.put("email", email);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return userInfo;
 	}
-
 
 	public void KakaoLogout(String accessToken) {
 		String reqURL = "http://kapi.kakao.com/v1/user/logout";
@@ -111,7 +118,7 @@ public class KakaoApi {
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
 			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode = " + responseCode);
+			logger.info("responseCode = " + responseCode);
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
@@ -121,7 +128,7 @@ public class KakaoApi {
 			while((line = br.readLine()) != null) {
 				result+=line;
 			}
-			System.out.println(result);
+			logger.info(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

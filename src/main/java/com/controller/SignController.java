@@ -4,15 +4,18 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class SignController {
-KakaoApi kakaoApi = new KakaoApi();
+
+	KakaoAPI kakaoApi = new KakaoAPI();
+	private static Logger logger = LoggerFactory.getLogger(SignController.class);
 	
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam("code") String code, HttpSession session) {
@@ -22,13 +25,13 @@ KakaoApi kakaoApi = new KakaoApi();
 		// 2번 인증코드로 토큰 전달
 		HashMap<String, Object> userInfo = kakaoApi.GetUserInfo(accessToken);
 		
-		System.out.println("login info : " + userInfo.toString());
+		logger.info("login info : " + userInfo.toString());
 		
-		if(userInfo.get("account_email") != null) {
-			session.setAttribute("userId", userInfo.get("account_email"));
+		if(userInfo.get("email") != null) {
+			session.setAttribute("userId", userInfo.get("email"));
 			session.setAttribute("accessToken", accessToken);
 		}
-		mav.addObject("userId", userInfo.get("account_email"));
+		mav.addObject("userId", userInfo.get("email"));
 		mav.setViewName("index");
 		return mav;
 	}
