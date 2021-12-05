@@ -1,19 +1,390 @@
+/*웹 페이지 전체의 스타일 설정*/
 body {
-    background: rgb(0, 0, 0)!important
+
+    /*배경 색을 검은색으로 설정(그냥 지정하면 적용되지 않는 현상이 있어서 !important로 우선 적용되도록 함)*/
+    background: rgb(0, 0, 0)!important;
+
+    /*div와 div 사이의 거리를 0으로 설정*/
+    margin: 0;
 }
 
+/*웹 페이지 header의 스타일 설정*/
+header{
+
+    /*div의 테두리와 내부 컨텐츠 사이의 거리를 1rem(html요소의 폰트 사이즈에 따라 상대적으로 변화)으로 설정*/
+    padding: 1rem;
+
+    /*header를 flecontainer로 지정*/
+    display: flex;
+
+    /*header의 배경 색을 어두운 파란색으로 설정*/
+    background-color: rgb(5, 44, 102);
+}
+
+.search{
+
+
+    
+    /*검색창의 배경색을 흰색으로 설정*/
+    background-color: white;
+
+    /*검색창의 테두리를 2px 크기의 실선으로 설정*/
+    border: 2px solid;
+
+    /*테두리와 내부 컨텐츠 사이의 거리를 세로 0.5rem, 가로 1rem으로 설정*/
+    padding: 0.5rem 1rem;
+
+    /*둥글기를 50px로 설정*/
+    border-radius: 50px;
+
+    /*글자의 크기를 1rem으로 설정*/
+    font-size: 1rem;
+
+    /*검색창의 상하 크기를 header div의 70%가 되도록 설정*/
+    height: 70%;
+}
+
+/*카카오 로그인 버튼의 출력 스타일 설정*/
+.kakao-login{
+
+    /*카카오 로그인 버튼을 우측으로 정렬*/
+    margin-left: auto;
+
+}
+
+/*웹페이지 상단의 간단한 페이지 소개의 스타일 설정(나중에 디자인을 조금 더 바꿀 에정)*/
 .pagepresentation{
+
+    /*다른 컨텐츠와 붙어있도록 하기 위해 margin을 0으로 설정*/
     margin: 0 auto;
+
+    /*페이지 소개 div의 크기 설정*/
     height: 100px;
     width: 500px;
+
+    /*페이지 소개 div의 배경색 설정*/
     background: white;
+
+    /*페이지 소개 div의 글씨 색을 검은색으로 설정*/
     color: black;
+
+    /*페이지 소개 div의 글씨 위치를 중앙으로 설정*/
     text-align: center;
+
+    /*페이지 소개 div의 좌하단과 우하단의 꼭짓점에 곡률을 줌*/
     border-bottom-left-radius: 80px;
     border-bottom-right-radius: 80px;
 }
 
-.rightshortcut{
-    position: fixed t;
-    background: white;
+/*웹 페이지 main의 스타일 설정*/
+main{
+
+    /*main 을 flexcontaier로 지정*/
+    display: flex;
+
+    /*main 내부의 컨텐츠의 너비가 브라우저의 너비를 초과할 경우 줄바꿈 하여 출력*/
+    flex-wrap: wrap;
+
+    /*내부 요소들을 컨테이너의 중앙으로 정렬*/
+    justify-content: center;
+
+    /*리뷰 입력 창보다 뒤에 표시되도록 설정(리뷰 입력창은 z-index를 2로 설정)*/
+    z-index: 1;
+}
+
+/*영화 카드 출력 스타일 설정*/
+.movie{
+
+    /*가로 길이를 300px로 설정*/
+    width: 300px;
+
+    /*테두리와 다른 컨텐츠 사이의 거리를 1rem으로 설정*/
+    margin: 1rem;
+
+    /*영화 카드의 둥글기를 3px로 설정*/
+    border-radius: 3px;
+
+    /*영화 카드의 배경 색 설정*/
+    background-color: #373b69;
+
+    /*영화 카드가 다른 컨텐츠의 위치에 맞춰 바뀌도록 설정*/
+    position: relative;
+
+    /*컨텐츠가 가로 혹은 세로로 넘어가는 경우 넘치는 부분이 보이지 않도록 설정*/
+    overflow: hidden;
+}
+
+/*영화 포스터의 출력 스타일 설정*/
+.movie img{
+
+    /*영화 이미지의 가로 길이를 100%로 설정(해당 div의 가로 길이만큼 크게 설정)*/
+    width: 100%;
+}
+
+/*영화 포스터 아래의 영화 정보 출력 스타일 설정*/
+.movie-info{
+
+    /*글씨 색을 흰색으로 설정*/
+    color: white;
+
+    /*movie-info div를 flex container로 지정*/
+    display: flex;
+
+    /*내부 아이템들을 세로축의 중앙으로 정렬*/
+    align-items: center;
+
+    /*내부 아이템들을 동일한 간격으로 정렬*/
+    justify-content: space-between;
+
+    /*테두리와 내부 컨텐츠 사이의 거리를 위0.5rem 좌우1rem 아래1rem*/
+    padding: 0.5rem 1rem 1rem;
+
+    /*글자 사이 간격을 0.5px로 설정*/
+    letter-spacing: 0.5px;
+}
+
+/*영화 정보 중 영화의 제목 부분 출력 스타일 설정*/
+.movie-info h3{
+
+    /*영화 제목 div와 다른 컨텐츠 사이의 거리를 0으로 설정*/
+    margin-top: 0;
+}
+
+/*영화 정보 중 영화의 평점 출력 부분의 스타일 설정*/
+.movie-info span{
+
+    /*평점 출력 div의 색을 짙은 파랑색으로 설정(영화 카드의 배경색보다 짙은 색으로 설정)*/
+    background-color: #22254b;
+
+    /*테두리와 내부 컨텐츠 사이의 간격을 상하 0.25rem 좌우 0.5rem으로 설정*/
+    padding: 0.25rem 0.5rem;
+    
+    /*평점 출력 박스의 둥글기를 3px로 설정*/
+    border-radius: 3px;
+
+    /*폰트를 굵은 글씨로 출력*/
+    font-weight: bold;
+}
+
+/*영화 평점의 표시 색을 초록색으로 설정*/
+.movie-info span.green{
+    color: lightgreen;
+}
+
+/*영화 평점의 표시 색을 노란색으로 설정*/
+.movie-info span.orange{
+    color: orange;
+}
+
+/*영화 평점의 표시 색을 빨간색으로 설정*/
+.movie-info span.red{
+    color: red;
+}
+
+/*영화 장르 태그를 담고있는 div의 스타일 지정*/
+#tags{
+
+    /*너비를 좌우 전체너비의 80%로 설정*/
+    width: 80%;
+
+    /*영화 장르 태그를 담는 div를 flex container로 지정*/
+    display: flex;
+
+    /*내부 컨텐츠의 너비가 div의 크기보다 커질 경우 줄바꿈 하여 출력*/
+    flex-wrap: wrap;
+
+    /*내부 컨텐츠들을 가로축의 가운데로 정렬*/
+    justify-content: center;
+
+    /*div와 외부 컨텐츠 사이의 거리를 상하 10px로 설정하고 div를 가로축의 중앙에 오도록 설정*/
+    margin: 10px auto;
+}
+
+/*영화 장르 태그의 스타일 설정*/
+.tag{
+
+    /*글씨 색을 흰색으로 설정*/
+    color: white;
+
+    /*장르 태그의 테두리와 내부 컨텐츠 사이의 거리를 상하 10px 좌우 20px로 설정*/
+    padding: 10px 20px;
+
+    /*배경색을 주황색으로 설정*/
+    background-color: orange;
+
+    /*둥글기를 50px로 설정*/
+    border-radius: 50px;
+
+    /*테두리와 외부 컨텐츠 사이의 거리를 5px로 설정*/
+    margin: 5px;
+
+    /*다른 컨텐츠들과 나란히 배치*/
+    display: inline-block;
+
+    /*커서를 올릴경우 모양이 pointer로 바뀌도록 설정*/
+    cursor: pointer;
+}
+
+/*장르 태그를 누를경우 해당 태그의 색이 빨간색으로 변하도록 설정*/
+.tag.highlight{
+    background-color: red;
+}
+
+
+/*리뷰 작성 버튼의 스타일 지정(기본적으로 장르 태그의 스타일과 유사)*/
+.open-review-btn{
+
+    /*배경색을 주황색으로 설정*/
+    background-color: orange;
+
+    /*커서를 올릴경우 모양이 pointer로 바뀌도록 설정*/
+    color:white;
+
+    /*폰트의 크기를 16px로 설정*/
+    font-size: 16px;
+
+    /*폰트를 굵은글씨로 출력*/
+    font-weight: bold;
+
+    /*테두리의 굵기를 0으로 설정*/
+    border:0;
+
+    /*둥글기를 50px로 설정*/
+    border-radius: 50px;
+
+    /*테두리와 내부 컨텐츠 사이의 거리를 상하 10px 좌우 20px로 설정*/
+    padding: 10px 20px;
+
+    /*테두리와 외부 컨텐츠 사이의 거리를 5px로 설정*/
+    margin-top: 5px;
+
+    /*커서를 올릴경우 모양이 pointer로 바뀌도록 설정*/
+    cursor: pointer;
+
+}
+
+/*리뷰창 제목 부분의 스타일 설정*/
+.review-window-title{
+
+    /*글씨색을 흰색으로 설정*/
+    color:white;
+}
+
+/*리뷰 창 스타일 설정*/
+.review-window{
+
+    /*최초에 리뷰창의 너비를 0으로 해서 보이지 않도록 설정*/
+    height: 100%;
+    width: 0;
+
+    /*스크롤을 이동시켜도 게속 같은자리에 표시되도록 설정*/
+    position: fixed; 
+    
+
+    /*리뷰 창이 화면을 가득 채우도록 설정*/
+    left: 0;
+    top: 0;
+     
+    /*배경색을 검은색으로 설정*/
+    background-color: rgb(0,0,0);
+
+    /*배경을 80% 투명도의 검은색으로 설정*/
+    background-color: rgba(0,0,0, 0.9); 
+
+    /*내용이 좌우로 넘칠 때 좌우 스크롤이 나타나지 않도록 함*/
+    overflow-x: hidden; 
+
+    /*화면 전환 속도를 0.5초로 설정*/
+    transition: 0.5s; 
+
+    /*리뷰 창이 가장 앞에 표시되도록 설정(z인덱스를 가장 높은 값으로 할당)*/
+    z-index: 2;
+    
+}
+  
+/*영화 리뷰창의 제목 부분의 스타일 지정*/
+.review-window-title{
+
+    /*리뷰창 제목의 위치를 다른 컨텐츠의 위치에 상대적으로 배치되도록 설정*/
+    position: relative;
+
+    /*리뷰창 제목 div의 상하 크기를 리뷰창 크기의 10%로 설정*/
+    top: 10%;
+
+    /*리뷰창 제목 div의 좌우 크기를 리뷰창 크기의 100%로 설정*/
+    width: 100%;
+
+    /*텍스트를 중앙으로 정렬*/
+    text-align: center; 
+
+    /*리뷰 제목 부분의 테두리와 다른 컨텐츠 사이의 간격을 30px로 설정*/
+    margin-top: 30px;
+}
+
+/*리뷰할 영화의 리뷰 내용을 출력할 review-contents의 스타일 설정*/
+.review-contents{
+
+    /*리뷰 내용의 위치를 다른 컨텐츠의 위치에 상대적으로 배치되도록 설정*/
+    position: relative;
+
+    /*텍스트를 중앙으로 정렬*/
+    text-align: center; 
+
+    /*글씨 색을 흰색으로 설정*/
+    color: white;
+}
+
+
+/*리뷰창의 닫기 버튼의 스타일 설정*/
+.review-window .closebtn{
+
+    /*닫기 버튼의 위치를 고정 위치에 지정*/
+    position: absolute;
+
+    /*닫기버튼이 리뷰 창의 우상단에 표시되도록 설정*/
+    top: 20px;
+    right: 45px;
+
+    /*닫기 버튼의 폰트 크기 설정*/
+    font-size: 60px;
+}
+
+/*리뷰 추가를 위한 input 창과 리뷰 제출 버튼을 포함하는 div의 스타일 설정*/
+.add-review-div{
+
+    /*리뷰 추가 div를 상대 위치에 지정(위에 리뷰의 양이 많아지면 자연스럽게 아래로 이동하도록 설정)*/
+    position: relative;
+
+    /*리뷰 추가 div가 화면의 중하단에 위치하도록 설정*/
+    transform: translate(-50%, -50%);
+    top: 80%;
+    left:50%;
+    
+    /*리뷰 추가 div의 크기 설정*/
+    height: 50px;
+    width: 1300px;
+
+}
+
+/*리뷰 추가를 위한 input 입력창의 스타일 설정*/
+.review-form{
+
+    /*div 내부의 input 입력창의 위치를 고정 위치에 지정*/
+    position: absolute;
+
+    /*input 입력창이 div의 중앙에 위치하도록 설정*/
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+/*리뷰 추가 버튼 스타일 설정*/
+.addreview-btn{
+    /*div 내부의 리뷰 추가 버튼의 위치를 고정 위치에 지정*/
+    position: absolute;
+
+    /*리뷰 추가 버튼이 div의 우측 가운데에 위치하도록 설정(input 입력창의 옆에 표시되도록 설정)*/
+    top: 50%;
+    left:90%;
+    transform: translate(-50%, -50%);
 }

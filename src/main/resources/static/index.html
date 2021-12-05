@@ -1,20 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
+	<!-- 문자 인코딩 방식을 UTF-8로 설정 -->
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+
+	<!-- 반응형 웹 뷰포트 설정 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- 웹페이지 제목 설정 -->
+	<title>H&Js 영화 리뷰</title>
+
+	<!-- css 적용 -->
+	<link rel="stylesheet" href="moviereviewstyle.css" />
+
 </head>
+
 <body>
-	<h1>로그인 방법을 선택해주세요.</h1>
-	<span th:if="${userId==null}">
-		<a href="https://kauth.kakao.com/oauth/authorize?client_id=fc55dc4d7388cceddc4b9d22feaa308d&redirect_uri=http://localhost:3000/login&response_type=code">
-			<img width="223" src ="kakao_login_medium_narrow.png"/>
-		</a>
-	</span>
-	<span th:if="${userId!=null}">
-		<form name="logout" action="http://localhost:3000/logout">
-			<!--  <input type="submit" value="로그아웃"> 실험용-->
+
+	<!--영화 검색 바 부분-->
+	<header>
+		<form id="form">
+			<input type="text" placeholder="Search" id="search" class="search">
 		</form>
-	</span>
+		<div class="kakao-login">
+			<span th:if="${userId==null}">
+				<a href="https://kauth.kakao.com/oauth/authorize?client_id=fc55dc4d7388cceddc4b9d22feaa308d&redirect_uri=http://localhost:3000/login&response_type=code">
+					<img width="223" src ="kakao_login_medium_narrow.png"/>
+				</a>
+			</span>
+			<span th:if="${userId!=null}">
+				<form name="logout" action="http://localhost:3000/logout">
+					<!--  <input type="submit" value="로그아웃"> 실험용-->
+				</form>
+			</span>
+		</div>
+	</header>
+
+	<!-- 페이지 소개 부분-->
+	<div class="pagepresentation">
+		<h1>H&Js 영화 리뷰(가제)</h1>
+		<p>좋아하는 영화에 인상적인 리뷰를 남겨보세요</p>
+	</div>
+
+	<!--영화 장르 태그 부분-->
+	<div id="tags"></div>
+
+	<div id="review-window" class="review-window">
+
+        <!-- 영화 리뷰 작성 팝업 닫기버튼 출력(하이퍼 링크를 이용하되 하이퍼 링크로 이동하지 않고 closeWindow 함수를 실행) -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeWindow()">&times;</a>
+      
+		<!-- 영화 리뷰창의 제목 및 영화에 작성된 리뷰를 출력하기위한 review-contents-->
+		<div class="movie-review-title" id="movie-review-title"></div>
+
+        <!-- 영화 리뷰창의 제목 및 영화에 작성된 리뷰를 출력하기위한 review-contents-->
+        <div class="review-contents" id="review-contents"></div>
+
+		<!-- 영화 리뷰를 입력받기 위한 div-->
+		<div class="add-review-div">
+
+			<!--사용자로부터 리뷰를 입력받기 위한 input 태그-->
+			<input type="text" class="review-formp" id="review" style="width:70%">
+	
+			<!--사용자로부터 입력받은 리뷰를 저장하기 위한 button 태그-->
+			<button type="button" id="addreview-btn" class="addreview-btn">후기 쓰기</button>
+		</div>
+    </div>
+
+	<!--영화 내용 출력 부분-->
+	<main id="main"></main>
+
+	<!--페이지 변경 부분-->
+	<div class="pagecontrol">
+
+		<!--이전 페이지로 이동-->
+		<div class="page" id="prev">Previous Page</div>
+
+		<!--현재 페이지 출력-->
+		<div class="current" id="current">1</div>
+
+		<!--다음 페이지로 이동-->
+		<div class="page" id="next">Next Page</div>
+
+	</div>
+
+	<!--MovieReview.js 자바스크립트 파일을 포함하도록 함-->
+	<script src="moviereview.js"></script>
+
 </body>
-</html >
+
+</html>
