@@ -409,6 +409,7 @@ function showMovies(data){
 // 상수 reviewContents : review-contents라는 id를 가진 html element를 저장
 const reviewContents = document.getElementById('review-contents');
 const movieReviewTitle = document.getElementById('movie-review-title');
+var movieInfo = '';
 
 // 영화 리뷰창을 열고 내부 내용을 지정하는 openWindow 함수(인수로 showMovies 함수에서 받아온 영화의 정보를 가져옴)
 function openWindow(movie) {
@@ -423,10 +424,8 @@ function openWindow(movie) {
     <h1 class="review-window-title">${movie.original_title} 리뷰</h1>
     <br/>
     `
-    
-    addReview(movie);
-    
-    
+
+    movieInfo = movie;
 }
 
 // 리뷰창 닫기 함수(리뷰 창의 x 버튼을 누르면 closeWindow 함수가 호출되도록 함)
@@ -436,31 +435,22 @@ function closeWindow() {
     document.getElementById("review-window").style.width = "0%";
 }
 
-function addReview(){
+
+document.getElementById('addreview-btn').addEventListener('click', () => {
+    addReview(movieInfo)
+})
+
+
+function addReview(movie){
     
-    // 변수 movieId : showMovies 함수에서 받아온 영화의 정보에서 영화의 id를 가져와 저장
-    var movieId = movie.id;
-
     // 변수 writedReview : 사용자가 입력한 리뷰를 저장
-    var writedReview = "";
-
+    var writedReview = document.getElementById('review').value;
+    console.log(writedReview);
 
     // 변수 makereview 사용자로부터 입력받은 리뷰를 db에 저장하기 위한 형태(json)로 바꾸어 저장 
-    var makereview = {};
-    makereview[movieId] = {"userID" : "userID", "review" : writedReview};
+    var makeReview = {[movie.id] :{"userID" : "userID", "review" : writedReview}};
+    console.log(makeReview);
 
-    console.log(makereview);
-    // 여기서 서버에 makereview를 post할 예정
-
-
-    //여기서 db에 저장된 리뷰를 가져올 예정
-
-    // 변수 savedReview : 서버로부터 읽어온 영화의 리뷰를 저장(이후 savedReview를 reviewInformation에 추가)
-    var savedReview = "";
-
-    // 
-    // reviewContents.innerHTML =
-    
 }
 
 // 리뷰를 db에 저장할 때 시도해보고싶은 방법
