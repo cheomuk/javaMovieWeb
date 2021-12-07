@@ -31,7 +31,7 @@
 			</span>
 			<span th:if="${userId!=null}">
 				<form name="logout" action="http://localhost:3000/logout">
-					<!--  <input type="submit" value="로그아웃"> 실험용-->
+					<input type="submit" value="로그아웃">
 				</form>
 			</span>
 		</div>
@@ -39,7 +39,7 @@
 
 	<!-- 페이지 소개 부분-->
 	<div class="pagepresentation">
-		<h1>H&Js 영화 리뷰(가제)</h1>
+		<h1>H&Js 영화 리뷰</h1>
 		<p>좋아하는 영화에 인상적인 리뷰를 남겨보세요</p>
 	</div>
 
@@ -60,8 +60,9 @@
 		<!-- 영화 리뷰를 입력받기 위한 div-->
 		<div class="add-review-div">
 
+		
 			<!--사용자로부터 리뷰를 입력받기 위한 input 태그-->
-			<input type="text" class="review-formp" id="review" style="width:70%">
+			<input type="text" class="review-form" id="review" style="width:70%">
 	
 			<!--사용자로부터 입력받은 리뷰를 저장하기 위한 button 태그-->
 			<button type="button" id="addreview-btn" class="addreview-btn">후기 쓰기</button>

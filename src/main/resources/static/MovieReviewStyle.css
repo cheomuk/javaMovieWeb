@@ -181,6 +181,41 @@ main{
     color: red;
 }
 
+/*영화 카드의 리뷰 쓰기 버튼을 포함하는 div의 스타일 지정*/
+.writeReview{
+
+    /*위치를 고정 위치로 설정*/
+    position:absolute;
+
+    /*div가 영화 박스의 좌우와 하단에 접하도록 설정*/
+    left:0;
+    right:0;
+    bottom:0;
+
+    /*배경 색을 흰색으로 설정*/
+    background-color: #fff;
+
+    /*테두리와 내부 컨텐츠 사이의 거리를 1rem으로 설정*/
+    padding: 1rem;
+
+    /*높이를 영화 카드의 높이의 8%로 설정*/
+    height: 8%;
+
+    /*위치를 y축으로(아래로) 이동(리뷰 쓰기 div가보이지 않을때까지)*/
+    transform:translateY(100%);
+
+    /*변화의 속도를 0.3초에 걸쳐 변하도록 지정*/
+    transition:transform 0.3s;
+}
+
+/*영화 카드에 커서를 올릴경우 writeReview div에 적용되는 스타일 지정*/
+.movie:hover .writeReview{
+
+    /*위치를 원래의 위치로 이동*/
+    transform:translateY(0)
+}
+
+
 /*영화 장르 태그를 담고있는 div의 스타일 지정*/
 #tags{
 
