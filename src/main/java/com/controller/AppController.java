@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,12 +35,12 @@ public class AppController {
 		this.movieMapper = mapper;
 	}
 	
-	@PostMapping("/movie/create/{id}")		// Create 기능
+	@PostMapping("/review/create")		// Create 기능
 	public void postMovieProfile(@PathVariable("id") String id, @RequestParam("movieId") String movieId, @RequestParam("review") String review) {
 		movieMapper.insertMovieProfile(id, movieId, review);
 	}
 	
-	@GetMapping("/movie/read")		// Read 기능
+	@GetMapping("/review/read")		// Read 기능
 	public List<MovieProfile> getMovieProfileList() {
 		return movieMapper.getMovieProfileList();
 	}
@@ -52,22 +50,22 @@ public class AppController {
 		return userMapper.getUserProfile(id);
 	}
 	
-	@PostMapping("/review/create/{id}")		// Create 기능
+	@PostMapping("/data/create/{id}")		// Create 기능
 	public void postUserProfile(@PathVariable("id") String id, @RequestParam("userId") String userId) {
 		userMapper.insertUserProfile(id, userId);
 	}
 	
-	@GetMapping("/review/read")		// Read 기능
+	@GetMapping("/data/read")		// Read 기능
 	public List<UserProfile>getUserProfileList() {
 		return userMapper.getUserProfileList();
 	}
 	
-	@PutMapping("/review/update/{id}")		// Update 기능
+	@PutMapping("/data/update/{id}")		// Update 기능
 	public void putUserProfile(@PathVariable("id") String id, @RequestParam("userId") String userId) {
 		userMapper.updateUserProfile(id, userId);
 	}
 	
-	@DeleteMapping("/review/delete/{id}")	// Delete 기능
+	@DeleteMapping("/data/delete/{id}")	// Delete 기능
 	public void deleteUserProfile(@PathVariable("id") String id, @RequestParam("userId") String userId) {
 		userMapper.deleteUserProfile(id);
 	}
