@@ -13,6 +13,7 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 // 상수 searchURL :  영화 검색 url 저장
 const searchURL = BASE_URL + '/search/movie?' + API_KEY;
 
+let token = "";	// 임시 전역변수
 
 // 리스트 genres : 장르 id와 name map형식으로 저장
 const genres = [
@@ -125,6 +126,11 @@ var selectedGenre = []
 
 // 장르 설정 함수 실행
 setGenre();
+
+
+token = '<%=accessToken%>';
+console.log(token);
+
 
 // 장르 설정 함수 setGenre()
 function setGenre() {
@@ -450,7 +456,12 @@ function addReview(movie){
     // 변수 makereview 사용자로부터 입력받은 리뷰를 db에 저장하기 위한 형태(json)로 바꾸어 저장 
     var makeReview = {[movie.id] :{"userID" : "userID", "review" : writedReview}};
     console.log(makeReview);
-
+    
+    var userId = '<%=userId%>';
+    var accessToken = '<%=accessToken%>';
+    
+    console.log(userId);
+    console.log(accessToken);
 }
 
 // 리뷰를 db에 저장할 때 시도해보고싶은 방법

@@ -2,6 +2,7 @@ package com.controller;
 
 import java.util.HashMap;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,11 +12,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mapper.SessionTokenMapper;
+
 @RestController
 public class SignController {
 
 	KakaoAPI kakaoApi = new KakaoAPI();
 	private static Logger logger = LoggerFactory.getLogger(SignController.class);
+	
+	private String getNick = "";
+	private String getToken = "";
+	
+	@Resource(name="SessionTokenMapper")
+	private SessionTokenMapper sessionToken;
+	
+	public SignController(SessionTokenMapper mapper) {
+		this.sessionToken = mapper;
+	}
 	
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam("code") String code, HttpSession session) {
@@ -31,7 +44,14 @@ public class SignController {
 			session.setAttribute("userId", userInfo.get("email"));
 			session.setAttribute("accessToken", accessToken);
 		}
+		
+		getNick = userInfo.get("nickname").toString();
+		getToken = accessToken;
+		
+		sessionToken.insertSessionProfile(getToken, getNick);
+		
 		mav.addObject("userId", userInfo.get("email"));
+		mav.addObject("accessToken", accessToken);
 		mav.setViewName("index");
 		return mav;
 	}
@@ -39,6 +59,10 @@ public class SignController {
 	@RequestMapping(value="/logout")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		
+		if ((String)session.getAttribute("accessToken") == getToken) {
+			sessionToken.deleteSessionProfile(getToken);
+		}
 		
 		kakaoApi.KakaoLogout((String)session.getAttribute("accessToken"));
 		session.removeAttribute("accessToken");
