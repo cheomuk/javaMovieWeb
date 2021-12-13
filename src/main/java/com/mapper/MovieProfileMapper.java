@@ -17,6 +17,6 @@ public interface MovieProfileMapper {
 	@Insert("INSERT INTO movieprofile VALUES(#{movie_id}, #{review})")
 	int insertMovieProfile(@Param("movie_id") String movieId, @Param("review") String review);
 	
-	@Select("SELECT review FROM movieprofile WHERE movie_id=#{movie_id}")
-	List<MovieProfile>getMovieProfileList(@Param("movie_id") String movieId);		
+	@Select("SELECT * FROM movieprofile")
+	List<MovieProfile>getMovieProfileList();	
 }

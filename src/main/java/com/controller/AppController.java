@@ -41,8 +41,8 @@ public class AppController {
 	}
 	
 	@GetMapping("/review/read")		// Read 기능
-	public List<MovieProfile> getMovieProfileList(@PathVariable("movie_id") String movieId) {
-		return movieMapper.getMovieProfileList(movieId);
+	public List<MovieProfile> getMovieProfileList() {
+		return movieMapper.getMovieProfileList();
 	}
 	
 	@GetMapping("/user/{id}")		// 특정 정보 조회
