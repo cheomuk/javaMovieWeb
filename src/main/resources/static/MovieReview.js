@@ -122,15 +122,10 @@ var lastUrl = '';
 var totalPages = 100;
 
 // 리스트 selectedGenre : 선택된 장르를 담을 리스트(장르를 중복 선택 가능)
-var selectedGenre = []
+var selectedGenre = [];
 
 // 장르 설정 함수 실행
 setGenre();
-
-
-token = '<%=accessToken%>';
-console.log(token);
-
 
 // 장르 설정 함수 setGenre()
 function setGenre() {
@@ -400,7 +395,7 @@ function showMovies(data){
             </div>
         
         `
-        // mian 클래스를 가진 태그에 movieElement 객체 삽입
+        // main 클래스를 가진 태그에 movieElement 객체 삽입
         main.appendChild(movieElement);
 
         // 영화의 id에 해당하는 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
@@ -456,12 +451,6 @@ function addReview(movie){
     // 변수 makereview 사용자로부터 입력받은 리뷰를 db에 저장하기 위한 형태(json)로 바꾸어 저장 
     var makeReview = {[movie.id] :{"userID" : "userID", "review" : writedReview}};
     console.log(makeReview);
-    
-    var userId = '<%=userId%>';
-    var accessToken = '<%=accessToken%>';
-    
-    console.log(userId);
-    console.log(accessToken);
 }
 
 // 리뷰를 db에 저장할 때 시도해보고싶은 방법

@@ -36,13 +36,13 @@ public class AppController {
 	}
 	
 	@PostMapping("/review/create")		// Create 기능
-	public void postMovieProfile(@PathVariable("id") String id, @RequestParam("movieId") String movieId, @RequestParam("review") String review) {
-		movieMapper.insertMovieProfile(id, movieId, review);
+	public void postMovieProfile(@RequestParam("movie_id") String movieId, @RequestParam("review") String review) {
+		movieMapper.insertMovieProfile(movieId, review);
 	}
 	
 	@GetMapping("/review/read")		// Read 기능
-	public List<MovieProfile> getMovieProfileList() {
-		return movieMapper.getMovieProfileList();
+	public List<MovieProfile> getMovieProfileList(@PathVariable("movie_id") String movieId) {
+		return movieMapper.getMovieProfileList(movieId);
 	}
 	
 	@GetMapping("/user/{id}")		// 특정 정보 조회
