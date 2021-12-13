@@ -48,14 +48,16 @@
 	<div id="tags"></div>
 
 	<div id="review-window" class="review-window">
-
-        <!-- 영화 리뷰 작성 팝업 닫기버튼 출력(하이퍼 링크를 이용하되 하이퍼 링크로 이동하지 않고 closeWindow 함수를 실행) -->
-        <a href="javascript:void(0)" class="closebtn" onclick="closeWindow()">&times;</a>
+		<div class="review-header">
+			<!-- 영화 리뷰 작성 팝업 닫기버튼 출력(하이퍼 링크를 이용하되 하이퍼 링크로 이동하지 않고 closeWindow 함수를 실행) -->
+			<a href="javascript:void(0)" class="closebtn" onclick="closeWindow()">&times;</a>
       
-		<!-- 영화 리뷰창의 제목 및 영화에 작성된 리뷰를 출력하기위한 review-contents-->
-		<div class="movie-review-title" id="movie-review-title"></div>
-
-        <!-- 영화 리뷰창의 제목 및 영화에 작성된 리뷰를 출력하기위한 review-contents-->
+			<!-- 영화 리뷰창의 제목 및 영화에 작성된 리뷰를 출력하기위한 review-contents-->
+			<div class="movie-review-title" id="movie-review-title"></div>
+	
+		</div>
+        
+        <!-- 영화 리뷰창에 작성된 리뷰를 출력하기위한 review-contents-->
         <div class="review-contents" id="review-contents"></div>
 
 		<!-- 영화 리뷰를 입력받기 위한 div-->
@@ -87,12 +89,10 @@
 	</div>
 	<!--MovieReview.js 자바스크립트 파일을 포함하도록 함-->
 	<script src="moviereview.js"></script>
-	
+
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	
 	<script>
-		var movieId = "";
-		
 		function addReview(movie){
 		
     		// 변수 writedReview : 사용자가 입력한 리뷰를 저장
@@ -117,25 +117,38 @@
             	}
         	})
 		}
-		
+		const reviewContents = document.getElementById("review-contents");
 		function readReview(movie){
-			
-			movieId = (movie.id).toString();
+			var showReview = "";
+			var movieId = (movie.id).toString();
+			console.log(movieId);
 			$.ajax({
-            	url: `/review/read`,
-            	data: { movie_id : movieId }, 
-      			type : "GET",
-            	success: function(data){
-        		    for(var i = 0; i < data.length(); i++){
-        		    	document.write(data);
-        		        console.log(data);	
-        		    }
-        		    $(resultList).html(result)
-        		},
-            	error:function(e){
+				url: `/review/read`,
+				type: "GET",
+				dataType:"json",
+				success: function(data){
+					console.log("양호");
+					if(data.length != 0){
+						console.log("리뷰 있음");
+						console.log(data);
+						data.forEach(reviewInfo =>{
+							console.log(reviewInfo);
+							if(reviewInfo.movieId == movieId){
+								console.log("문자열 추가");
+								showReview = showReview + reviewInfo.review +'\n\n';
+							}
+						});
+						reviewContents.innerText = showReview;
+					}
+					else{
+						console.log("리뷰 없음");
+					}
+
+				},
+				error:function(e){
 					console.log("에러");
-            	}
-        	})
+				}
+			})
 		}
 	</script>
 </body>

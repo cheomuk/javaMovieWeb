@@ -401,14 +401,14 @@ function showMovies(data){
         // 영화의 id에 해당하는 html element에 이벤트 리스너 추가(클릭시 이벤트 발생)
         document.getElementById(id).addEventListener('click', () => {
 
+            readReview(movie);
             // 영화 리뷰 창을 여는 openWindow 함수 실행
-            openWindow(movie)
+            openWindow(movie);
         })
     })
 }
 
 // 상수 reviewContents : review-contents라는 id를 가진 html element를 저장
-const reviewContents = document.getElementById('review-contents');
 const movieReviewTitle = document.getElementById('movie-review-title');
 var movieInfo = '';
 
@@ -436,40 +436,10 @@ function closeWindow() {
     document.getElementById("review-window").style.width = "0%";
 }
 
-
 document.getElementById('addreview-btn').addEventListener('click', () => {
-    addReview(movieInfo)
+    addReview(movieInfo);
+    readReview(movieInfo);
 })
-
-
-function addReview(movie){
-    
-    // 변수 writedReview : 사용자가 입력한 리뷰를 저장
-    var writedReview = document.getElementById('review').value;
-    console.log(writedReview);
-
-    // 변수 makereview 사용자로부터 입력받은 리뷰를 db에 저장하기 위한 형태(json)로 바꾸어 저장 
-    var makeReview = {[movie.id] :{"userID" : "userID", "review" : writedReview}};
-    console.log(makeReview);
-}
-
-// 리뷰를 db에 저장할 때 시도해보고싶은 방법
-// 내가 원하는 자료의 형태
-// 영화ID : { 유저ID : XXX, 리뷰 내용 : OOO}의 형태로 저장하고
-// 나중에 리뷰 내용을 보기 위해 호출할때 아마 문자열의 형태로 올테니까 json 형식으로 파싱후
-// 키 값인 영화ID로 유저ID 및 리뷰 내용을 호출할 수 있도록 하는것이 목표
-// 보내는 방식
-// post 형식
-// 주소 /movie/create/{id}
-// 받아오는 방식
-//get 방식
-// movieProfile 테이블에서 
-// id, movieid, review 
-// 위의 목표를 위해 이 addReview 함수에서 해야 할 일
-// 먼저 위에서 모달창을 만들었으니 모달창에 유저가 입력한 값을 받아오기
-// db로부터 유저의ID 정보 받아오기
-// 인수로 받아온 movieId, db에서 받아온 유저ID, 유저로부터 입력받은 리뷰 내용을 조합하여 
-// 하나의 json데이터로 만든 후 db에 저장해주는 것 
 
 
 

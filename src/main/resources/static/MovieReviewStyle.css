@@ -423,3 +423,18 @@ main{
     left:90%;
     transform: translate(-50%, -50%);
 }
+
+.review-contents{
+    position: relative;
+    top: 15%;
+    left:50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.review-header{
+    position: relative;
+    margin: 0;
+}
