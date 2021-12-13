@@ -1,22 +1,21 @@
 package com.model;
 
 public class MovieProfile {
-	private String id;
+	private int idx;
 	private String movieId;
 	private String review;
 	
-	public MovieProfile(String id, String movieId, String review) {
-		this.id = id;
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+
+	public MovieProfile(String movieId, String review) {
 		this.movieId = movieId;
 		this.review = review;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getMovieId() {

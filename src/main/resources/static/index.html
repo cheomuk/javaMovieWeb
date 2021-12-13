@@ -28,6 +28,8 @@
 					<img width="223" src ="kakao_login_medium_narrow.png"/>
 				</a>
 			</span>
+		</div>
+		<div>
 			<span th:if="${userId!=null}">
 				<form name="logout" action="http://localhost:3000/logout">
 					<input type="submit" value="로그아웃">
@@ -85,6 +87,57 @@
 	</div>
 	<!--MovieReview.js 자바스크립트 파일을 포함하도록 함-->
 	<script src="moviereview.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+	<script>
+		var movieId = "";
+		
+		function addReview(movie){
+		
+    		// 변수 writedReview : 사용자가 입력한 리뷰를 저장
+    		var writedReview = document.getElementById('review').value;
+			movieId = (movie.id).toString();
+			
+			$.ajax({
+            	url: `/review/create`,
+
+            	data: {
+					movie_id : movieId,
+                	review : writedReview
+            	}, // HTTP 요청과 함께 서버로 보낼 데이터 POST 방식에서만 사용
+
+      			type : "POST",
+      			
+            	success:function(){
+            		console.log("양호");
+            	},
+            	error:function(e){
+					console.log("에러");
+            	}
+        	})
+		}
+		
+		function readReview(movie){
+			
+			movieId = (movie.id).toString();
+			$.ajax({
+            	url: `/review/read`,
+            	data: { movie_id : movieId }, 
+      			type : "GET",
+            	success: function(data){
+        		    for(var i = 0; i < data.length(); i++){
+        		    	document.write(data);
+        		        console.log(data);	
+        		    }
+        		    $(resultList).html(result)
+        		},
+            	error:function(e){
+					console.log("에러");
+            	}
+        	})
+		}
+	</script>
 </body>
 
 </html>

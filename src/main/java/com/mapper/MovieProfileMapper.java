@@ -14,9 +14,9 @@ import com.model.MovieProfile;
 @Repository
 public interface MovieProfileMapper {
 		
-	@Insert("INSERT INTO movieprofile VALUES(#{id}, #{movieId}, #{review})")
-	int insertMovieProfile(@Param("id") String id, @Param("movieId") String movieId, @Param("review") String review);
+	@Insert("INSERT INTO movieprofile VALUES(#{movie_id}, #{review})")
+	int insertMovieProfile(@Param("movie_id") String movieId, @Param("review") String review);
 	
-	@Select("SELECT * FROM movieprofile")
-	List<MovieProfile>getMovieProfileList();		
+	@Select("SELECT review FROM movieprofile WHERE movie_id=#{movie_id}")
+	List<MovieProfile>getMovieProfileList(@Param("movie_id") String movieId);		
 }
